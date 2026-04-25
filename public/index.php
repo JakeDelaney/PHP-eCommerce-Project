@@ -2,7 +2,7 @@
 require_once("../templates/header.php");
 ?>
     
-    <title>Home page</title>
+<title>Home page</title>
 </head>
 <body>
     <?php
