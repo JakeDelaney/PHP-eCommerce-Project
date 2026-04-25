@@ -26,5 +26,6 @@ require_once("../templates/header.php");
                 <img src="../assets/img/store1.jpg" alt="Two men browsing a display of vinyl records">
         </div>
     </div>
-</body>
-</html>
+<?php
+    require_once("../templates/footer.php");
+?>
