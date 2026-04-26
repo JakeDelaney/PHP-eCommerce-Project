@@ -8,3 +8,10 @@ img {
     background-size: cover;
     height: 600px;
 }
+
+.signup-form{
+    width: 50%;
+    border: 1.5px solid rgb(63, 63, 63);
+    border-radius: 5% 5% 0 0;
+    padding: 20px 0 20px;
+}
