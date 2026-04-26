@@ -10,7 +10,7 @@ require_once("../templates/header.php");
     ?>
 
     <div class="container">
-        <div class="bg-img p-4">
+        <div class="bg-img mt-4 p-4">
             <div class="row">
                 <div class="col-4">
                     <h1>Our mission</h1>

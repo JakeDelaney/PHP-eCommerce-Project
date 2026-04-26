@@ -6,7 +6,7 @@
             <a class="nav-link text-light mx-3" href="about.php">About</a>
             <a class="nav-link text-light mx-3" href="products.php">Products</a>
             <a class="nav-link text-light mx-3" href="contact.php">Contact</a>
-            <a class="nav-link text-light mx-3" href="">Account</a>
+            <a class="nav-link text-light mx-3" href="account.php">Account</a>
         </div>
     </div>
 </nav>

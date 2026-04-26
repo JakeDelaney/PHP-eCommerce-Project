@@ -1,0 +1,22 @@
+<?php
+require_once("../templates/header.php");
+?>
+    
+<title>Account details</title>
+</head>
+<body>
+    <?php
+    require_once("../templates/navbar.php");
+    ?>
+
+    <div class="container mt-4 text-center">
+        <div class="row">
+            <h2>Account details</h2>
+        </div>
+    </div>
+
+    <p>Table will go here</p>
+    
+<?php
+    require_once("../templates/footer.php");
+?>

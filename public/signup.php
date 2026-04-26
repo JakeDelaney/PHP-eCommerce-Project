@@ -15,7 +15,7 @@ require_once("../templates/header.php");
             <hr>
         </div>
         <div class="row mt-4">
-            <div class="col-4 mx-auto signup-form-container p-3 gap-4">
+            <div class="col-4 mx-auto form-container p-3 gap-4">
                 <form action="" id="signup-form">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingUserName" placeholder="JohnDeer007">
