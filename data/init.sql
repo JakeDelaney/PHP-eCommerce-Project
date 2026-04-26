@@ -1,7 +1,11 @@
+/*THIS FILE IS RESPONSIBLE FOR INITIALIZING THE DATABASE*/
+
+/*Drop database if it exists, then create database and select it*/
 DROP DATABASE emerald_records_db;
 CREATE DATABASE emerald_records_db;
 USE emerald_records_db;
 
+/*create users table*/
 CREATE TABLE users (
     user_id INT UNSIGNED AUTO_INCREMENT UNIQUE PRIMARY KEY,
     username VARCHAR(20) UNIQUE NOT NULL,
@@ -9,6 +13,7 @@ CREATE TABLE users (
     password VARCHAR(60) NOT NULL
 );
 
+/*create products table*/
 CREATE TABLE products (
     product_id INT UNSIGNED AUTO_INCREMENT UNIQUE PRIMARY KEY,
     product_name VARCHAR(50) UNIQUE NOT NULL,
@@ -18,6 +23,7 @@ CREATE TABLE products (
     quantity int
 );
 
+/*insert some values into products table*/
 INSERT INTO products (product_name, artist_name, music_genre, year_released, quantity)
 VALUES ('Pixie Dust - Single', 'Baelor Swift', 'Pop', 2025, 50),
        ('Acid Death - LP', 'Non-Metallica', 'Metal', 1990, 50),
