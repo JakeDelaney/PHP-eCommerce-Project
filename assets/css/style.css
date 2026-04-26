@@ -9,9 +9,13 @@ img {
     height: 600px;
 }
 
-.signup-form{
-    width: 50%;
+.signup-form-container{
     border: 1.5px solid rgb(63, 63, 63);
     border-radius: 5% 5% 0 0;
-    padding: 20px 0 20px;
+    background-color: rgb(0, 133, 55);
+}
+
+.btn {
+    height: 40px;
+    width: 200px;
 }
