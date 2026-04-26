@@ -9,13 +9,18 @@ require_once("../templates/header.php");
     require_once("../templates/navbar.php");
     ?>
 
+    <!--MAIN CONTAINER-->
     <div class="container mt-4 text-center">
+        <!--ROW 1-->
         <div class="row">
             <h2>Please login to view this page.</h2>
             <hr>
         </div>
+        <!--ROW 2-->
         <div class="row mt-4">
+            <!--COLUMN-->
             <div class="col-4 mx-auto form-container p-3 gap-4">
+                <!--LOGIN FORM-->
                 <form action="" id="login-form">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingUserName" placeholder="JohnDeer007">
@@ -28,7 +33,11 @@ require_once("../templates/header.php");
                 </form>
             </div>
         </div>
+        <!--ROW 3-->
         <div class="row mt-4">
+            <!--COLUMN
+                Places buttons outside of form for styling, but links them by the button 'form' attribute, to the 'id' attribute of the form itself
+            -->
             <div class="col">
                 <button type="submit" form="login-form" class="btn btn-primary me-2">login</button>
             </div>

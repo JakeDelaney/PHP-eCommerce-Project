@@ -9,9 +9,13 @@ require_once("../templates/header.php");
     require_once("../templates/navbar.php");
     ?>
 
+    <!--MAIN CONTAINER-->
     <div class="container">
+        <!--DIV FOR BACKGROUND IMAGE-->
         <div class="bg-img mt-4 p-4">
+            <!--ROW-->
             <div class="row">
+                <!--COLUMN-->
                 <div class="col-4">
                     <h1>Our mission</h1>
                     <hr>

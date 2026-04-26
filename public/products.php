@@ -9,6 +9,7 @@ require_once("../templates/header.php");
     require_once("../templates/navbar.php");
     ?>
 
+    <!--MAIN CONTAINER-->
     <div class="container-fluid text-center">
         <h2>Products</h2>
         <table>
