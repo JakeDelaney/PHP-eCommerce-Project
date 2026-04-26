@@ -1,7 +1,6 @@
 /*THIS FILE IS RESPONSIBLE FOR INITIALIZING THE DATABASE*/
 
-/*Drop database if it exists, then create database and select it*/
-DROP DATABASE emerald_records_db;
+/*Create and use database*/
 CREATE DATABASE emerald_records_db;
 USE emerald_records_db;
 
