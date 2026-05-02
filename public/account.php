@@ -1,5 +1,5 @@
 <?php
-require_once("../templates/header.php");
+require_once("../templates/header-member.php");
 ?>
     
 <title>Account details</title>
