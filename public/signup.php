@@ -3,17 +3,19 @@ require_once("../templates/header.php");
 ?>
 
 <?php
-$passErr="";
-//IF STATEMENT
-//Check if POST data is set, and if so execute below code block
+$signupPassErr = ""; //initiate var with empty string to prevent undefined variable error (if called later on with no value)
+
+//OUTER IF STATEMENT
+//Check if POST data in signup form is set, and if so execute below code block
 if(isset($_POST['create'])) {
+    require_once ("../src/sanitize.php"); //require sanitize.php file
+
+    //INNER IF STATEMENT
+    //If password and passwordConfirm keys in POST superglobal are a match, execute below code block
     if($_POST['password'] == $_POST['passwordConfirm']) {
-        //require sanitize function
-        require_once ("../src/sanitize.php");
         //TRY STATEMENT
         try {
-            //require DBConnect
-            require_once("../src/DBConnect.php");
+            require_once("../src/DBConnect.php");//require DBConnect
             //Create $newUser array and pass values into keys from POST superglobal
             //Data will first be passed as an argument into the sanitize function, cleaned and then returned to array
             $newUser = array (
@@ -23,23 +25,28 @@ if(isset($_POST['create'])) {
                 "password" => sanitize($_POST['password'])
             );
 
-            //Insert values from $new_user array into database as a prepared SQL statement
+            //Insert values from $newUser array into database as a prepared SQL statement
             $sql = sprintf( "INSERT INTO %s (%s) values (%s)", "users", 
                 implode(", ",array_keys($newUser)), ":" . implode(", :", array_keys($newUser)) );
             $statement = $connection->prepare($sql);
             $statement->execute($newUser);
 
+            //Once prepared SQL statement has been executed, redirect user to success page and exit to prevent remaining code from running
             header("location:success.php");
             exit;
-            
+        
+        //catch any errors related to attempted DB connection
         } catch (PDOException $error) {
             echo $sql . "<br>" . $error->getMessage();
         }
+
+    //INNER IF STATEMENT - ELSE if password and passwordConfirm do no match, assign text to $signupPassErr var
     } else {
-        $passErr= ("Passwords not do match. Please try again.");
+        $signupPassErr= ("Passwords not do match. Please try again.");
     }
 } 
 ?>
+
 <title>Signup page</title>
 </head>
 <body>
@@ -93,7 +100,7 @@ if(isset($_POST['create'])) {
                 <button type="reset" form="signup-form" class="btn btn-secondary ms-2">Reset</button>
             </div>
         </div>
-        <h5 class="text-danger mt-4"><?php echo($passErr);?></h5>
+        <h5 class="text-danger mt-4"><?php echo($signupPassErr);?></h5>
     </div>
 <?php
     require_once("../templates/footer.php");
