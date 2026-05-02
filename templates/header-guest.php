@@ -1,3 +1,8 @@
+<?php
+//this template permits end users that are both guests and members to view any webpage that requires this file
+require_once('../src/session-start.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
