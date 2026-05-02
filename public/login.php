@@ -29,7 +29,11 @@ if(isset($_POST['login'])) {
             //IF STATEMENT
             //if value associated with password key in $result array matches value in $loginPassword var, execute below code block
             if($row['password'] == $loginPassword) {
-
+                $_SESSION['username'] = $loginUser; //set session username
+                $_SESSION['active'] = true; //set session to 'Active' and allow user to access member pages
+                //redirect user to home page after successful login, and exit to prevent remaining code from running
+                header("location:index.php");
+                exit;
             //ELSE if values do not match, assign text to $loginPassErr
             } else {
                 $loginPassErr = "Invalid username or password.";
@@ -83,6 +87,12 @@ if(isset($_POST['login'])) {
                 <button name="login" type="submit" form="login-form" class="btn btn-primary me-2">login</button>
             </div>
             <h5 class="text-danger mt-4"><?php echo($loginPassErr);?></h5>
+        </div>
+
+        <!--ROW 4-->
+        <div class="row mt-4">
+            <h6>Not a member? click below to create an account</h6>
+            <a href="signup.php">Click me!</a>
         </div>
     </div>
 

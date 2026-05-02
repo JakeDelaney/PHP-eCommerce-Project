@@ -1,3 +1,9 @@
+<div class="container mt-4">
+    <div class="row">
+        <h5 class="mt-4">Logged in as: <?php echo($_SESSION['username'])?></h5>
+    </div>
+</div>
+
 <footer class="container-fluid fixed-bottom bg-dark text-light">
     <div class="row">
         <div class="col">

@@ -4,7 +4,7 @@ require_once('../src/session-start.php');
 
 //IF STATEMENT
 //check if session value is to false and redirect the user to the signup page to create an account
-if($_SESSION['Active'] == false) {
+if($_SESSION['active'] == false) {
     header("location:login.php");
     exit;
 }

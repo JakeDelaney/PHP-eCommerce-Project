@@ -6,6 +6,6 @@ require_once("../templates/header-guest.php");
 <body>
     <div class="container text-center mt-4">
         <h1 class mt-4>Account successfully created</h1>
-        <a href="index.php">Please click here to return!</a>
+        <a href="login.php">Please click here to login!</a>
     </div>
 </body>
