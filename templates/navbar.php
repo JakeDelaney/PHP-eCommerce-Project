@@ -1,3 +1,4 @@
+<!--This template provides the navigation bar for all site webpages-->
 <nav class="navbar navbar-expand bg-success">
     <div class="container-fluid">
     <h1 class="text-light ms-3">Emerald Records</h1>
