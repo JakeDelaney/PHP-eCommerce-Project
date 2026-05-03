@@ -31,48 +31,62 @@ if(isset($_SESSION['username'])) {
 <?php
 //SQL QUERY #2 - This query is reponsible for updating the account details of the currently logged in user
 //the SQL statements takes sanitized values from the details-form and binds them into the SQL statement that targets by user_id
+
+$detailsPassErr=""; //initiate var with empty string to prevent undefined variable error (if called later on with no value)
+
+//IF STATEMENT
+//if $_POST has data set, execute below code block
 if(isset($_POST['update'])) {
 
-    //FOR LOOP
-    //loop through each row, and pass the key for user_id into the variable after running it through the sanitize function
-    foreach($result as $row) { 
-        $user_id = sanitize($row['user_id']);
-    };
+    //INNER IF STATEMENT
+    //if values in password and passwordConfirm match, execute below code block
+    if($_POST['password'] == $_POST['passwordConfirm']) {
 
-    try {
-        //require DBconnect and attempt to connect and query to DB with prepared SQL query
-        require_once('../src/DBconnect.php');
+        //FOR LOOP
+        //loop through each row, and pass the key for user_id into the variable after running it through the sanitize function
+        foreach($result as $row) { 
+            $user_id = sanitize($row['user_id']);
+        };
 
-        //Create $updateUser array and pass it sanitize values from POST superglobal
-        $updateUser = array (
-                "username" => sanitize($_POST['username']),
-                "email" => sanitize($_POST['email']),
-                "address" => sanitize($_POST['address']),
-                "password" => sanitize($_POST['password'])
-            );
+        try {
+            //require DBconnect and attempt to connect and query to DB with prepared SQL query
+            require_once('../src/DBconnect.php');
 
-        //Updates users table and user properties where the user_id matches the logged in user
-        $sql = "UPDATE users
-                SET username = :username, email = :email, address = :address, password = :password
-                WHERE user_id = :user_id";
+            //Create $updateUser array and pass it sanitize values from POST superglobal
+            $updateUser = array (
+                    "username" => sanitize($_POST['username']),
+                    "email" => sanitize($_POST['email']),
+                    "address" => sanitize($_POST['address']),
+                    "password" => sanitize($_POST['password'])
+                );
 
-        //Bind $updateUser array values to SQL statement
-        $statement = $connection->prepare($sql);
-        $statement->bindParam(':username', $updateUser['username'], PDO::PARAM_STR); //bind data from $_POST[username] to username
-        $statement->bindParam(':email', $updateUser['email'], PDO::PARAM_STR); //bind data from $_POST[username] to username
-        $statement->bindParam(':address', $updateUser['address'], PDO::PARAM_STR); //bind data from $_POST[username] to username
-        $statement->bindParam(':password', $updateUser['password'], PDO::PARAM_STR); //bind data from $_POST[username] to username
-        $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR); //bind data from $_POST[username] to username
-        $statement->execute();
+            //Updates users table and user properties where the user_id matches the logged in user
+            $sql = "UPDATE users
+                    SET username = :username, email = :email, address = :address, password = :password
+                    WHERE user_id = :user_id";
 
-        //update $S_SESSION username to match any changes and redirect user to account update success page, exit to prevent any further code from running
-        $_SESSION['username'] = $updateUser['username'];
-        header("location:success-account-update.php");
-        exit;
+            //Bind $updateUser array values to SQL statement
+            $statement = $connection->prepare($sql);
+            $statement->bindParam(':username', $updateUser['username'], PDO::PARAM_STR); //bind data from $_POST[username] to username
+            $statement->bindParam(':email', $updateUser['email'], PDO::PARAM_STR); //bind data from $_POST[username] to username
+            $statement->bindParam(':address', $updateUser['address'], PDO::PARAM_STR); //bind data from $_POST[username] to username
+            $statement->bindParam(':password', $updateUser['password'], PDO::PARAM_STR); //bind data from $_POST[username] to username
+            $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR); //bind data from $_POST[username] to username
+            $statement->execute();
 
-    //catch any errors related to attempted DB connection
-    } catch (PDOException $error) {
-        echo $sql . "<br>" . $error->getMessage();
+            //update $S_SESSION username to match any changes and redirect user to account update success page, exit to prevent any further code from running
+            $_SESSION['username'] = $updateUser['username'];
+            header("location:success-account-update.php");
+            exit;
+
+        //catch any errors related to attempted DB connection
+        } catch (PDOException $error) {
+            echo $sql . "<br>" . $error->getMessage();
+        }
+
+      //else if passwords do not match, assign string to variable and print to screen
+    } else {
+        $detailsPassErr= ("Updated passwords not do match. Please try again.");
     }
 }
 ?>
@@ -117,7 +131,7 @@ if(isset($_POST['update'])) {
                         <label for="floatingPassword">Password</label>
                     </div>
                     <div class="form-floating mt-3">
-                        <input name="password" type="password" class="form-control" id="floatingPasswordConfirm" value="<?php echo sanitize($row['password']); ?>" required>
+                        <input name="passwordConfirm" type="password" class="form-control" id="floatingPasswordConfirm" value="<?php echo sanitize($row['password']); ?>" required>
                         <label for="floatingPasswordConfirm">Confirm password</label>
                     </div>
                 </form>
@@ -134,6 +148,7 @@ if(isset($_POST['update'])) {
                 <button name="update" type="submit" form="details-form" class="btn btn-primary me-2">Submit</button>
                 <button type="reset" form="details-form" class="btn btn-secondary ms-2">Reset</button>
             </div>
+            <h5 class="text-danger mt-4"><?php echo($detailsPassErr);?></h5>
         </div>
     </div>
 
