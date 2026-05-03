@@ -9,17 +9,23 @@ CREATE TABLE users (
     user_id INT UNSIGNED AUTO_INCREMENT UNIQUE PRIMARY KEY,
     username VARCHAR(20) UNIQUE NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
-    address VARCHAR(100),
+    address VARCHAR(100) NOT NULL,
     password VARCHAR(60) NOT NULL
 );
+
+/*insert some values into users table*/
+INSERT INTO users (username, email, address, password,)
+VALUES ('John Deer', 'johndeer@yahoo.com', '21 Maple Avenue', 'SimplePassword'),
+       ('Michael Cork', 'mcork2001@yahoo.com', '50 Black Rock', 'Password123'),
+       ('Jane Dove', 'janedove2026@gmail.com', '50 Black Rock', 'iloveapples')
 
 /*create products table*/
 CREATE TABLE products (
     product_id INT UNSIGNED AUTO_INCREMENT UNIQUE PRIMARY KEY,
     product_name VARCHAR(50) UNIQUE NOT NULL,
     artist_name VARCHAR(50) NOT NULL,
-    music_genre VARCHAR(20),
-    year_released YEAR,
+    music_genre VARCHAR(20) NOT NULL,
+    year_released YEAR NOT NULL,
     quantity int
 );
 
