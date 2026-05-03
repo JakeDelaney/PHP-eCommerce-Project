@@ -14,10 +14,10 @@ CREATE TABLE users (
 );
 
 /*insert some values into users table*/
-INSERT INTO users (username, email, address, password,)
+INSERT INTO users (username, email, address, password)
 VALUES ('John Deer', 'johndeer@yahoo.com', '21 Maple Avenue', 'SimplePassword'),
        ('Michael Cork', 'mcork2001@yahoo.com', '50 Black Rock', 'Password123'),
-       ('Jane Dove', 'janedove2026@gmail.com', '50 Black Rock', 'iloveapples')
+       ('Jane Dove', 'janedove2026@gmail.com', '50 Black Rock', 'iloveapples');
 
 /*create products table*/
 CREATE TABLE products (
