@@ -28,7 +28,7 @@ require_once("../templates/header-member.php");
             </div>
             <!--COLUMN 2-->
             <div class="col">
-                <img src="../assets/img/store2.jpg" alt="Two men browsing a display of vinyl records">
+                <img src="../assets/img/store2.jpg" alt="A woman exits the front of a vinyl record store">
             </div>
         </div>
     </div>
