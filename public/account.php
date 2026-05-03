@@ -3,17 +3,64 @@ require_once("../templates/header-member.php");
 ?>
 
 <?php
+//SQL QUERY #1 - This query is responsible for querying the database with the value stored in $_SESSION[username] 
+//and retrieving any user data associated with that username
+
+//IF STATEMENT
+//if $_SESSION[username] has a value, execute below code block
 if(isset($_SESSION['username'])) {
-    require_once('../src/sanitize.php');
+    require_once('../src/sanitize.php'); //require sanitize.php for its sanitize function
+
+    //TRY STATEMENT
+    //require DBconnect and attempt to connect and query to DB with prepared SQL query
     try {
         require_once('../src/DBconnect.php');
         $sql = "SELECT * FROM users WHERE username = :username"; //select all from users where username = username
         $statement = $connection->prepare($sql);
-        $statement->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR); //bind sanitized data from $loginUser variable to username
+        $statement->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR); //bind data from $_SESSION[username] to username
         $statement->execute();
         $result = $statement->fetchAll(); //assign returned result to $result variable
 
-    }  catch (PDOException $error) {
+       //catch any errors related to attempted DB connection
+    } catch (PDOException $error) {
+        echo $sql . "<br>" . $error->getMessage();
+    }
+}
+?>
+
+<?php
+if(isset($_POST['update'])) {
+
+    foreach($result as $row) { 
+        $user_id = sanitize($row['user_id']);
+    };
+
+    try {
+        require_once('../src/DBconnect.php');
+
+        $updateUser = array (
+                "username" => sanitize($_POST['username']),
+                "email" => sanitize($_POST['email']),
+                "address" => sanitize($_POST['address']),
+                "password" => sanitize($_POST['password'])
+            );
+
+        $sql = "UPDATE users
+                SET username = :username, email = :email, address = :address, password = :password
+                WHERE user_id = :user_id";
+
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(':username', $updateUser['username'], PDO::PARAM_STR); //bind data from $_POST[username] to username
+        $statement->bindParam(':email', $updateUser['email'], PDO::PARAM_STR); //bind data from $_POST[username] to username
+        $statement->bindParam(':address', $updateUser['address'], PDO::PARAM_STR); //bind data from $_POST[username] to username
+        $statement->bindParam(':password', $updateUser['password'], PDO::PARAM_STR); //bind data from $_POST[username] to username
+        $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR); //bind data from $_POST[username] to username
+        $statement->execute();
+
+        $_SESSION['username'] = $updateUser['username'];
+
+    //catch any errors related to attempted DB connection
+    } catch (PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
     }
 }
@@ -48,7 +95,7 @@ if(isset($_SESSION['username'])) {
                     </div>
                     <div class="form-floating mt-3">
                         <input name="email" type="email" class="form-control" id="floatingEmail" value="<?php echo sanitize($row['email']); ?>" required>
-                        <label for="floatingEmail">Password</label>
+                        <label for="floatingEmail">Email</label>
                     </div>
                     <div class="form-floating mt-3">
                         <input name="address" type="text" class="form-control" id="floatingAddress" value="<?php echo sanitize($row['address']); ?>" required>
@@ -66,6 +113,7 @@ if(isset($_SESSION['username'])) {
                 <?php } ?>
             </div>
         </div>
+        
         <!--ROW 2-->
         <div class="row mt-4">
             <!--COLUMN
