@@ -29,6 +29,7 @@ require_once("../templates/header-guest.php");
             <div class="col">
                 <img src="../assets/img/store1.jpg" alt="Two men browsing a display of vinyl records">
             </div>
+        </div>
     </div>
 <?php
     require_once("../templates/footer.php");

@@ -4,32 +4,36 @@ require_once("../src/sanitize.php")
 ?>
 
 <?php
-    try {
-        require_once '../src/DBconnect.php';
-        $sql = "SELECT * FROM products";
-        $statement = $connection->prepare($sql);
-        $statement->execute();
-        $result = $statement->fetchAll();
-    } catch(PDOException $error) {
-        echo $sql . "<br>" . $error->getMessage();
-    }
+//TRY STATEMENT
+//attempt connection to DB, and execute prepared SQL statement, storing the returned data in $result var
+try {
+    require_once '../src/DBconnect.php';
+    $sql = "SELECT * FROM products";
+    $statement = $connection->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetchAll();
+} catch(PDOException $error) {
+    echo $sql . "<br>" . $error->getMessage();
+}
 ?>
 
 <title>Products page</title>
 </head>
 <body>
-    <?php
-    require_once("../templates/navbar.php");
-    ?>
+<?php
+require_once("../templates/navbar.php");
+?>
 
     <!--MAIN CONTAINER-->
     <div class="container mt-4 text-center">
+        <!--ROW 1-->
         <div class="row">
-            
+            <h2>Products</h2>
+            <hr>
         </div>
-        <h2>Products</h2>
-        <hr>
+        <!--TABLE-->
         <table class="table table-striped mt-4">
+            <!--Table headers-->
             <thead class="table-success">
                 <tr>
                     <th class="col-3">Record name</th>
@@ -39,8 +43,13 @@ require_once("../src/sanitize.php")
                     <th class="col">Quantity</th>
                 </tr>
             </thead>
+            <!--table body-->
             <tbody>
-                <?php foreach ($result as $row) { ?>
+                <?php 
+                //FOR LOOP
+                //look through each row, pass value through sanitize function and format within table body
+                foreach ($result as $row) { 
+                ?>
                 <tr>
                     <td><?php echo sanitize($row["product_name"]); ?></td>
                     <td><?php echo sanitize($row["artist_name"]); ?></td>
