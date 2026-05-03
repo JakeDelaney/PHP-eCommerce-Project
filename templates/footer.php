@@ -1,35 +1,41 @@
-<footer class="container-fluid fixed-bottom text-center bg-dark text-light">
-    <div class="row">
+<!--This template provides the footer for all website pages-->
 
-        <h5 class="mt-4">Logged in as:
-            <?php
-                $hidden = "";
-                if(isset($_SESSION['username'])) {
-                    echo $_SESSION['username'];
-                }
-                elseif(!isset($_SESSION['username'])) {
-                    echo("Guest");
-                    $hidden = "hidden";
-                }
-            ?>
-        </h5>
-    </div>
-    <div class="row">
-        <form action="logout.php" method="post" name="Logout_Form" class="form-signin mt-2">
-            <button name="Submit" value="Logout" class="btn btn-primary me-2" type="submit" <?php echo($hidden)?> >Log out</button>
-        </form>
-    </div>
+<!--MAIN CONTAINER-->
+<footer class="container-fluid fixed-bottom text-center bg-dark text-light">
+    <!--ROW-->
     <div class="row my-4">
+        <!--COL 1-->
         <div class="col">
-            <h3>Copyright</h3>
+            <h3>Copyright &copy</h3>
         </div>
+        <!--COL 2-->
         <div class="col">
-            <h3>Social media icons</h3>
+            <h5>Logged in as:
+                <?php
+                    $hidden = ""; //initialize var with empty string
+                    //IF STATEMENT
+                    //if $_SESSION username key has a value, echo it to screen
+                    if(isset($_SESSION['username'])) {
+                        echo $_SESSION['username'];
+                    }
+                    //else if username key has no value, echo guest and assign "hidden" string to $hidden var to hide logout button
+                    elseif(!isset($_SESSION['username'])) {
+                        echo("Guest");
+                        $hidden = "hidden";
+                    }
+                ?>
+            </h5>
+            <!--logout button-->
+            <form action="logout.php" method="post" name="Logout_Form" class="form-signin mt-4">
+                <button name="Submit" value="Logout" class="btn btn-primary me-2" type="submit" <?php echo($hidden)?> >Log out</button>
+            </form>
         </div>
+        <!--COL 3-->
         <div class="col">
-            <h3>Student name, number and assignment</h3>
+            <h3>Jake Delaney - B00148433</h3>
         </div>
     </div>
+    
 </footer>
 </body>
 </html>
