@@ -3,7 +3,7 @@ require_once("../templates/header-member.php");
 ?>
 
 <?php
-//SQL QUERY #1 - This query is responsible for querying the database with the value stored in $_SESSION[username] 
+//SQL QUERY 1 - This query is responsible for querying the database with the value stored in $_SESSION[username] 
 //and retrieving any user data associated with that username
 
 //IF STATEMENT
@@ -29,7 +29,7 @@ if(isset($_SESSION['username'])) {
 ?>
 
 <?php
-//SQL QUERY #2 - This query is reponsible for updating the account details of the currently logged in user
+//SQL QUERY 2 - This query is reponsible for updating the account details of the currently logged in user
 //the SQL statements takes sanitized values from the details-form and binds them into the SQL statement that targets by user_id
 
 $detailsPassErr=""; //initiate var with empty string to prevent undefined variable error (if called later on with no value)
@@ -89,6 +89,19 @@ if(isset($_POST['update'])) {
         $detailsPassErr= ("Updated passwords not do match. Please try again.");
     }
 }
+
+    //SQL QUERY 3 - This query is reponsible for deleting the account of the signed in user
+    //IF statement
+    //if POST is set, execute below code block
+    if(isset($_POST['delete'])) { 
+        $sql = "DELETE FROM users WHERE username = :username";
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
+        $statement->execute();
+        header("location:logout.php");
+        exit;
+    }
+
 ?>
 
 <title>Account details</title>
@@ -150,7 +163,17 @@ if(isset($_POST['update'])) {
             </div>
             <h5 class="text-danger mt-4"><?php echo($detailsPassErr);?></h5>
         </div>
+
+        <!--ROW 3-->
+        <div class="row mt-4">
+            <h5>Click below to delete your account</h5>
+            <form action="" method="POST" id="delete-form"></form>
+            <div class="col">
+                <button name="delete" type="submit" form="delete-form" class="btn btn-danger me-2 mt-2">Submit</button>
+            </div>
+        </div>
     </div>
+    
 
 <?php
     require_once("../templates/footer.php");
