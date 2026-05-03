@@ -117,7 +117,7 @@ if(isset($_POST['update'])) {
                         <label for="floatingPassword">Password</label>
                     </div>
                     <div class="form-floating mt-3">
-                        <input name="password" type="password" class="form-control" id="floatingPasswordConfirm" required>
+                        <input name="password" type="password" class="form-control" id="floatingPasswordConfirm" value="<?php echo sanitize($row['password']); ?>" required>
                         <label for="floatingPasswordConfirm">Confirm password</label>
                     </div>
                 </form>
