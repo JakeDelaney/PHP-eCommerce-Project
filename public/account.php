@@ -68,10 +68,10 @@ if(isset($_POST['update'])) {
             //Bind $updateUser array values to SQL statement
             $statement = $connection->prepare($sql);
             $statement->bindParam(':username', $updateUser['username'], PDO::PARAM_STR); //bind data from $_POST[username] to username
-            $statement->bindParam(':email', $updateUser['email'], PDO::PARAM_STR); //bind data from $_POST[username] to username
-            $statement->bindParam(':address', $updateUser['address'], PDO::PARAM_STR); //bind data from $_POST[username] to username
-            $statement->bindParam(':password', $updateUser['password'], PDO::PARAM_STR); //bind data from $_POST[username] to username
-            $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR); //bind data from $_POST[username] to username
+            $statement->bindParam(':email', $updateUser['email'], PDO::PARAM_STR); //bind data from $_POST[username] to email
+            $statement->bindParam(':address', $updateUser['address'], PDO::PARAM_STR); //bind data from $_POST[username] to address
+            $statement->bindParam(':password', $updateUser['password'], PDO::PARAM_STR); //bind data from $_POST[username] to password
+            $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR); //bind data from $_POST[username] to user_id
             $statement->execute();
 
             //update $S_SESSION username to match any changes and redirect user to account update success page, exit to prevent any further code from running
@@ -89,19 +89,38 @@ if(isset($_POST['update'])) {
         $detailsPassErr= ("Updated passwords not do match. Please try again.");
     }
 }
+?>
 
-    //SQL QUERY 3 - This query is reponsible for deleting the account of the signed in user
-    //IF statement
-    //if POST is set, execute below code block
-    if(isset($_POST['delete'])) { 
-        $sql = "DELETE FROM users WHERE username = :username";
+<?php
+//SQL QUERY 3 - This query is reponsible for deleting the account of the signed in user
+
+//IF STATEMENT
+//if $_POST is set, execute below code block
+if(isset($_POST['delete'])) {
+
+    //INNER FOR LOOP
+    //loop through $result and assign value from user_id column to $user_id var
+    foreach($result as $row) { 
+        $user_id = sanitize($row['user_id']);
+    };
+
+    //require DBconnect and attempt to connect and query to DB with prepared SQL query
+    try {
+        require_once('../src/DBconnect.php');
+        $sql = "DELETE FROM users WHERE user_id = :user_id"; //delete user from table, where user_id column value = bound value from $user_id
         $statement = $connection->prepare($sql);
-        $statement->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
+        $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
         $statement->execute();
+
+        //redirect user to logout.php to kill session after account deletion and exit to prevent remaining code from running
         header("location:logout.php");
         exit;
-    }
 
+    //catch any errors related to attempted DB connection
+    } catch (PDOException $error) {
+        echo $sql . "<br>" . $error->getMessage();
+    }  
+}
 ?>
 
 <title>Account details</title>
@@ -164,7 +183,9 @@ if(isset($_POST['update'])) {
             <h5 class="text-danger mt-4"><?php echo($detailsPassErr);?></h5>
         </div>
 
-        <!--ROW 3-->
+        <!--ROW 3
+        Delete account button
+        -->
         <div class="row mt-4">
             <h5>Click below to delete your account</h5>
             <form action="" method="POST" id="delete-form"></form>
