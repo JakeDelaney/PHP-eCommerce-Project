@@ -2,6 +2,11 @@
     <div class="row">
         <h5 class="mt-4">Logged in as: <?php echo($_SESSION['username'])?></h5>
     </div>
+    <div class="row">
+        <form action="logout.php" method="post" name="Logout_Form" class="form-signin">
+            <button name="Submit" value="Logout" class="button" type="submit">Log out</button>
+        </form>
+    </div>
     <div class="row my-4">
         <div class="col">
             <h3>Copyright</h3>
