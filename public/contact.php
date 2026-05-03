@@ -20,14 +20,15 @@ require_once("../templates/header-member.php");
         <div class="row mt-4">
             <!--COLUMN 1-->
             <div class="col">
-                <p>Phone no: +353 01 200 3000</p>
-                <p>Email: company@gmail.com</p>
-                <p>Address: 37 Make Believe Avenue, Co. Dublin, Ireland, A09 YTPN</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates natus nemo eaque voluptatem asperiores beatae repudiandae quo facere, commodi eum soluta accusantium, praesentium voluptas voluptate doloribus perspiciatis? Reiciendis, amet harum.
+                Fugit voluptatum, libero necessitatibus earum veritatis quae distinctio possimus natus itaque at voluptas repellat consequuntur deserunt quos accusantium incidunt iste nam temporibus ratione recusandae beatae hic mollitia rerum minus! Eos?</p>
+                <p class="text-start mt-4"><strong>Phone no:</strong> +353 01 200 3000</p>
+                <p class="text-start"><strong>Email:</strong> company@gmail.com</p>
+                <p class="text-start"><strong>Address:</strong> 37 Make Believe Avenue, Co. Dublin, Ireland, A09 YTPN</p>
             </div>
             <!--COLUMN 2-->
             <div class="col">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo aspernatur reiciendis autem quisquam officiis cumque laborum! Fugiat modi veritatis laborum, debitis eius vero incidunt possimus inventore, ducimus cupiditate, at veniam.
-                Reiciendis ipsum quaerat tenetur quisquam saepe cum debitis corrupti, blanditiis architecto explicabo, sequi magni repudiandae praesentium cumque nostrum recusandae unde, quia nobis commodi veritatis harum officia ex impedit! Voluptates, error!</p>
+                <img src="../assets/img/store2.jpg" alt="Two men browsing a display of vinyl records">
             </div>
         </div>
     </div>

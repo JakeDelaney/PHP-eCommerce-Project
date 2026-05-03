@@ -35,4 +35,7 @@ VALUES ('Pixie Dust - Single', 'Baelor Swift', 'Pop', 2025, 50),
        ('Acid Death - LP', 'Non-Metallica', 'Metal', 1990, 50),
        ('Cherry Fields - Single', 'Nuns N Noses', 'Rock', 1982, 50),
        ('The Grey Album - Double-sided LP', 'The Bees', 'Rock', 1968, 50),
-       ('Horizon - Single', 'Draft Funk', 'Electronic', 2004, 50);
+       ('Horizon - Single', 'McDavey', 'Electronic', 2004, 50),
+       ('Moonlight - Single', 'Sharon Monroe', 'Classical', 1970, 50),
+       ('The Return - LP', 'Coolio Jr.', 'RnB', 2006, 50),
+       ('Concrete Hearts - Doubled-side LP', 'Nerve-on-ye', 'Punk', 1994, 50);
