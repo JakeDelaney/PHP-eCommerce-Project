@@ -26,7 +26,7 @@
                 ?>
             </h5>
             <!--logout button-->
-            <form action="logout.php" method="post" name="Logout_Form" class="form-signin mt-4">
+            <form action="logout.php" method="post" name="Logout_Form" class="form-signin mt-3">
                 <button name="Submit" value="Logout" class="btn btn-primary me-2" type="submit" <?php echo($hidden)?> >Log out</button>
             </form>
         </div>

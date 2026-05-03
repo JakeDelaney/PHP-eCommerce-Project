@@ -11,11 +11,12 @@ require_once("../templates/header-guest.php");
 
     <!--MAIN CONTAINER-->
     <div class="container mt-4 text-center">
+        <!--ROW 1-->
         <div class="row">
             <h2>Emerald Records - Ireland's Premier Vinyl Shop!</h2>
             <hr>
         </div>
-        <!--ROW-->
+        <!--ROW 2-->
         <div class="row mt-4">
             <!--COLUMN 1-->
             <div class="col">
