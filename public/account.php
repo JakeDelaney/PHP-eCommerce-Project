@@ -29,15 +29,21 @@ if(isset($_SESSION['username'])) {
 ?>
 
 <?php
+//SQL QUERY #2 - This query is reponsible for updating the account details of the currently logged in user
+//the SQL statements takes sanitized values from the details-form and binds them into the SQL statement that targets by user_id
 if(isset($_POST['update'])) {
 
+    //FOR LOOP
+    //loop through each row, and pass the key for user_id into the variable after running it through the sanitize function
     foreach($result as $row) { 
         $user_id = sanitize($row['user_id']);
     };
 
     try {
+        //require DBconnect and attempt to connect and query to DB with prepared SQL query
         require_once('../src/DBconnect.php');
 
+        //Create $updateUser array and pass it sanitize values from POST superglobal
         $updateUser = array (
                 "username" => sanitize($_POST['username']),
                 "email" => sanitize($_POST['email']),
@@ -45,10 +51,12 @@ if(isset($_POST['update'])) {
                 "password" => sanitize($_POST['password'])
             );
 
+        //Updates users table and user properties where the user_id matches the logged in user
         $sql = "UPDATE users
                 SET username = :username, email = :email, address = :address, password = :password
                 WHERE user_id = :user_id";
 
+        //Bind $updateUser array values to SQL statement
         $statement = $connection->prepare($sql);
         $statement->bindParam(':username', $updateUser['username'], PDO::PARAM_STR); //bind data from $_POST[username] to username
         $statement->bindParam(':email', $updateUser['email'], PDO::PARAM_STR); //bind data from $_POST[username] to username
@@ -57,6 +65,7 @@ if(isset($_POST['update'])) {
         $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR); //bind data from $_POST[username] to username
         $statement->execute();
 
+        //update $S_SESSION username to match any changes and redirect user to account update success page, exit to prevent any further code from running
         $_SESSION['username'] = $updateUser['username'];
         header("location:success-account-update.php");
         exit;
