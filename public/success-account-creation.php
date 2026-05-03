@@ -1,5 +1,5 @@
 <?php
-require_once("../templates/header-guest.php");
+require_once("../templates/header-member.php");
 ?>
 <title>Success!</title>
 </head>

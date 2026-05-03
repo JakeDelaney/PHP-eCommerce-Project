@@ -58,6 +58,8 @@ if(isset($_POST['update'])) {
         $statement->execute();
 
         $_SESSION['username'] = $updateUser['username'];
+        header("location:success-account-update.php");
+        exit;
 
     //catch any errors related to attempted DB connection
     } catch (PDOException $error) {

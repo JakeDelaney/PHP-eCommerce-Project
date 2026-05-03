@@ -32,7 +32,7 @@ if(isset($_POST['create'])) {
             $statement->execute($newUser);
 
             //Once prepared SQL statement has been executed, redirect user to success page and exit to prevent remaining code from running
-            header("location:success.php");
+            header("location:success-account-creation.php");
             exit;
         
         //catch any errors related to attempted DB connection
